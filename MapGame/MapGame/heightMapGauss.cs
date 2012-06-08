@@ -12,9 +12,9 @@ namespace MapGame
         TestSimpleRNG.SimpleRNG myRandom = new TestSimpleRNG.SimpleRNG();
 
 
-        public heightMapGauss()
+        public heightMapGauss(int size = 4096)
         {
-            int n = 9; // this should be of the form 2^n + 1
+            int n = (int)Math.Pow(2,4)+1; // this should be of the form 2^n + 1
             int[,] gaussOld = new int[n, n];
             int standDev = 512;
 
@@ -37,7 +37,7 @@ namespace MapGame
             }
             standDev /= 2;
 
-            for (int i = 2 * (n - 1) + 1; i < 2000; i = 2 * (i - 1) + 1)
+            for (int i = 2 * (n - 1) + 1; i < size; i = 2 * (i - 1) + 1)
             {
                 int j = 0;
                 gaussNew = new int[i, i];
@@ -72,6 +72,7 @@ namespace MapGame
                 // showElevation( gaussOld );
                 gaussOld = gaussNew;
                 standDev /= 2;
+                Console.WriteLine(i);
             }
 
             //showElevation( gaussOld );
